@@ -5,7 +5,7 @@ from pendulum import datetime
 @dag(
     schedule=None,
     start_date=datetime(2026, 2, 19),
-    tags=['sensor'],
+    tags=['sensor', 'example'],
     catchup=False
 )
 def sensors_dag():
