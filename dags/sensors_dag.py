@@ -1,5 +1,5 @@
-from airflow.decorators import dag, task
-from airflow.sensors.filesystem import FileSensor
+from airflow.sdk import dag, task
+from airflow.sdk.bases.sensor import FileSensor
 from pendulum import datetime
 
 @dag(

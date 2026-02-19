@@ -1,14 +1,15 @@
-from airflow.decorators import dag, task
+from airflow.sdk import dag, task
 from pendulum import datetime
 import requests
 
-from airflow.sensors.base import PokeReturnValue
+from airflow.sdk.bases.sensor import PokeReturnValue
 
 
 @dag(
         start_date=datetime(2026, 2, 19), 
         schedule="@daily", 
-        catchup=False
+        catchup=False,
+        tags=["example", "sensor", "decorator"],
 )
 def sensor_decorator():
 

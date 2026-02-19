@@ -1,5 +1,5 @@
-from airflow.decorators import dag, task
-from datetime import datetime
+from airflow.sdk import dag, task
+from pendulum import datetime
 
 @dag(
     schedule=None,
