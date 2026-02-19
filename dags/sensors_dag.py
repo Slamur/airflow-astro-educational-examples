@@ -20,6 +20,7 @@ def sensors_dag():
     wait_for_files = FileSensor.partial(
         task_id='wait_for_files',
         fs_conn_id='fs_default',
+        mode='reschedule',
     ).expand(
         filepath=filepaths,
     )
