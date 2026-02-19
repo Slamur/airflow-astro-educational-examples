@@ -15,7 +15,7 @@ def sensor_decorator():
 
     @task.sensor(
             poke_interval=30, 
-            timeout=3600, 
+            timeout=300, 
             mode="poke"
     )
     def check_shibe_availability() -> PokeReturnValue:
