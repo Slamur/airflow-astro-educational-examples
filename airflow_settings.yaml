@@ -30,5 +30,5 @@ airflow:
       pool_slot:
       pool_description:
   variables:
-    - variable_name:
-      variable_value:
+    - variable_name: settings_example_variable
+      variable_value: settings_example_value
