@@ -1,0 +1,6 @@
+{
+    "dag_id": "file_a",
+    "schedule_interval": "@daily",
+    "input": "file_a.txt",
+    "location": "/transformed"
+}
