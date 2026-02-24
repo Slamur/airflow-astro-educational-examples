@@ -14,10 +14,14 @@ def dynamic_tasks_dag():
     def get_files():
         return [f"file_{i}.txt" for i in range(1, random.randint(3, 5))]
 
-    @task
+    @task(max_active_tis_per_dag=3) # limits for parallel runs
     def download_file(folder: str, file_name: str):
         print(f"Downloading {file_name} to {folder}...")
 
     files = download_file.partial(folder="/downloads").expand(file_name=get_files())
 
 dynamic_tasks_dag()
+
+"""
+AIRFLOW__CORE__MAX_MAP_LENGTH=1024
+"""
