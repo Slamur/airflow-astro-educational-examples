@@ -26,6 +26,14 @@ def dynamic_tasks_dag():
     
     process_file.expand(file_name=files)
 
+    @task.bash
+    def print_files(ti):
+        # gathers all the file names from the download_file tasks using XComs
+        file_names = ti.xcom_pull(task_ids="download_file", dag_id="dynamic_tasks_dag", key="return_value")
+        return f"echo {file_names}; exit 0"
+
+    files >> print_files()
+
 dynamic_tasks_dag()
 
 """
