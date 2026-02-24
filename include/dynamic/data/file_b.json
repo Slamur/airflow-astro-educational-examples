@@ -1,0 +1,6 @@
+{
+    "dag_id": "file_b",
+    "schedule_interval": "@weekly",
+    "input": "file_b.csv",
+    "location": "/reports"
+}
