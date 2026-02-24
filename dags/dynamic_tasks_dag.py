@@ -16,9 +16,15 @@ def dynamic_tasks_dag():
 
     @task(max_active_tis_per_dag=3) # limits for parallel runs
     def download_file(folder: str, file_name: str):
-        print(f"Downloading {file_name} to {folder}...")
+        return f"{folder}/{file_name}"
 
     files = download_file.partial(folder="/downloads").expand(file_name=get_files())
+
+    @task.bash
+    def process_file(file_name: str):
+        return f"ls {file_name}; exit 0"
+    
+    process_file.expand(file_name=files)
 
 dynamic_tasks_dag()
 
