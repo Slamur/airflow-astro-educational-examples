@@ -1,4 +1,4 @@
-from airflow.sdk import dag, task, Context
+from airflow.sdk import dag, task, get_current_context
 from pendulum import datetime
 
 
@@ -11,13 +11,15 @@ from pendulum import datetime
 def xcom_dag():
 
     @task
-    def push_in_context(**context: Context) -> None:
+    def push_in_context() -> None:
+        context = get_current_context()
         value = "Hello from XCom!"
         context["ti"].xcom_push(key="xcom_key", value=value)
 
     @task
-    def get_from_context(**context: Context) -> None:
-        value = context["ti"].xcom_pull(key="xcom_key", task_ids="push_in_xcom")
+    def get_from_context() -> None:
+        context = get_current_context()
+        value = context["ti"].xcom_pull(key="xcom_key", task_ids="push_in_context")
         print(f"Value retrieved from XCom: '{value}'")
 
     @task

@@ -5,10 +5,10 @@ from pendulum import datetime
 @dag(
     start_date=datetime(2026, 2, 18),
     schedule="@daily",
-    description="DAG to check file creation process",
+    description="DAG to check file creation process (bash example)",
     tags=["example", "bash"],
 )
-def check_dag():
+def bash_dag():
 
     tmp_file_path = "/tmp/test_file.txt"
 
@@ -28,4 +28,4 @@ def check_dag():
 
     create_file() >> check_file_exists() >> read_file()
 
-check_dag()
+bash_dag()
